@@ -1,12 +1,12 @@
 // Builds the static site: wraps every page in src/pages with the shared layout
-// and writes the result to public/. No dependencies; run with `node build.mjs`.
+// and writes the finished pages to the repo root (the folder you deploy). No dependencies; run with `node build.mjs`.
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(import.meta.url));
 const src = join(root, "src");
-const out = join(root, "public");
+const out = root;
 const SITE = "https://sunflow.ca";
 
 const partial = (name) => {

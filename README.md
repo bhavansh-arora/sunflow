@@ -24,37 +24,37 @@ A redesign of [sunflow.ca](https://sunflow.ca): a 15-page static site with a quo
 
 ## Folder layout
 
+The finished site lives at the top of the repo, so GitHub Pages serves it as-is at https://sunflow.codebunny.net.
+
 ```
-sunflow/
-  build.mjs          stitches shared header/footer into every page (Node 18+, no dependencies)
-  src/partials/      shared pieces: layout, header, menu, footer, calculator, ROI chart, closing call-to-action
-  src/pages/         one file per page (front matter at the top sets title, description, etc.)
-  public/            the finished site — this is the folder you deploy
-    assets/css/main.css    design system (colours, type, spacing, every component)
-    assets/js/main.js      menu, header, live Barrie sun widget, calculator, tooltips, galleries, modals
-    assets/js/motion.js    scroll animations (GSAP + ScrollTrigger, bundled in assets/vendor)
-    assets/js/funnel.js    the quote form
-    assets/js/config.js    form endpoint and who gets which kind of request
-    assets/img/            optimized WebP images taken from sunflow.ca
+index.html, *.html     the built pages (don't edit these by hand; they're rebuilt from src/)
+assets/css/main.css    design system (colours, type, spacing, every component)
+assets/js/main.js      menu, header, live Barrie sun widget, calculator, tooltips, galleries, modals
+assets/js/motion.js    scroll animations (GSAP + ScrollTrigger, bundled in assets/vendor)
+assets/js/funnel.js    the quote form
+assets/js/config.js    form endpoint and who gets which kind of request
+assets/img/            optimized WebP images taken from sunflow.ca
+src/partials/          shared pieces: layout, header, menu, footer, calculator, ROI chart, closing call-to-action
+src/pages/             one file per page (front matter at the top sets title, description, etc.)
+build.mjs              stitches the partials into every page (Node 18+, no dependencies)
+CNAME, .nojekyll       GitHub Pages settings
 ```
 
-Edit files in `src/`, then rebuild:
+Edit files in `src/`, then rebuild and commit the result:
 
 ```bash
-cd sunflow
 node build.mjs
 ```
 
 Preview locally:
 
 ```bash
-cd sunflow/public
-python3 -m http.server 8080      # then open http://localhost:8080
+python3 -m http.server 8080      # from the repo root, then open http://localhost:8080
 ```
 
 ## Deploying
 
-`public/` is plain HTML, CSS and JS. Upload it to any static host (Netlify, Vercel, Cloudflare Pages, S3, or the existing web host). `404.html` is picked up automatically by Netlify and Cloudflare Pages.
+GitHub Pages deploys the `main` branch from the repo root on every push. The site is plain HTML, CSS and JS, so it also works on any other static host; `404.html` is picked up automatically.
 
 ## Connecting the quote form
 
@@ -63,7 +63,7 @@ The form runs in **demo mode** until an endpoint is set. In demo mode, requests 
 1. Create a webhook that accepts JSON. Make, Zapier or n8n all work. A typical scenario:
    - create an item on SunFlow's monday.com leads board, filling columns from the payload
    - email the person named in `routing.email`
-2. Put the webhook URL in `public/assets/js/config.js` → `formEndpoint`.
+2. Put the webhook URL in `assets/js/config.js` → `formEndpoint`.
 3. Adjust `routing` in the same file so each service goes to the right person.
 
 Each request is sent as JSON like this:
