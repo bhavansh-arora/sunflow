@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <link rel="canonical" href="{{canonical}}">
+  <meta name="theme-color" content="#06111d">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SunFlow Solar &amp; Exteriors">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:url" content="{{canonical}}">
+  <meta property="og:image" content="https://sunflow.ca/{{image}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script>
+    (function (h) {
+      h.classList.add("js");
+      var rm = window.matchMedia("(prefers-reduced-motion: reduce)").matches, seen = null;
+      try { seen = sessionStorage.getItem("sf-loaded"); } catch (e) {}
+      if (rm) h.classList.add("motion-off");
+      else if (!seen) h.classList.add("is-preloading");
+      setTimeout(function () { if (!h.classList.contains("has-gsap")) { h.classList.add("motion-off"); h.classList.remove("is-preloading"); } }, 4000);
+    })(document.documentElement);
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "SunFlow Solar & Exteriors",
+    "slogan": "Think Global, Act Local",
+    "url": "https://sunflow.ca/",
+    "logo": "https://sunflow.ca/assets/img/logo-stacked-white.png",
+    "image": "https://sunflow.ca/assets/img/rooftop-dealership.webp",
+    "telephone": "+1-647-706-9908",
+    "email": "info@sunflow.ca",
+    "address": { "@type": "PostalAddress", "streetAddress": "30 Quarry Ridge Rd", "addressLocality": "Barrie", "addressRegion": "ON", "postalCode": "L4M 7G1", "addressCountry": "CA" },
+    "areaServed": ["Barrie", "Simcoe County", "Greater Toronto Area", "Ontario", "Manitoba"],
+    "founder": { "@type": "Person", "name": "Mike McCann", "jobTitle": "Founder & CEO" },
+    "sameAs": ["https://www.facebook.com/hellosunflow", "https://www.instagram.com/sunflowsolarandroofing/", "https://www.linkedin.com/company/sunflow-solar-roofing/"]
+  }
+  </script>
+</head>
+<body class="{{bodyClass}}" data-page="{{slug}}">
+  <a class="skip" href="#main">Skip to content</a>
+  {{> icons}}
+  {{> preloader}}
+  {{> header}}
+  {{> menu}}
+
+  <main id="main">
+{{content}}
+  </main>
+
+  {{> footer}}
+
+  <nav class="actionbar" aria-label="Quick actions">
+    <a class="actionbar__call" href="tel:+16477069908" aria-label="Call SunFlow at 647-706-9908"><svg class="icon"><use href="#i-phone"/></svg></a>
+    <a class="actionbar__quote" href="contact.html" data-quote-link>Get my free quote <svg class="icon"><use href="#i-arrow"/></svg></a>
+  </nav>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Media viewer" hidden>
+    <div class="modal__box">
+      <button class="modal__close" type="button" data-modal-close aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
+      <div class="modal__content"></div>
+      <p class="modal__caption"></p>
+    </div>
+  </div>
+
+  <div class="cursor" aria-hidden="true"><span>View</span></div>
+  <div class="tip" role="status" aria-live="polite"></div>
+  <div class="service-preview" aria-hidden="true"></div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/vendor/gsap.min.js" defer></script>
+  <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/motion.js" defer></script>
+</body>
+</html>

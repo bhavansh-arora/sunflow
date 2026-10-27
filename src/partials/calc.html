@@ -1,0 +1,44 @@
+<div class="calc" data-calc>
+          <div class="calc__controls">
+            <div>
+              <span class="label" id="calc-prov-label">Where is the project?</span>
+              <div class="seg mt-5" style="--n:2" role="group" aria-labelledby="calc-prov-label">
+                <span class="seg__pill" aria-hidden="true"></span>
+                <button type="button" data-prov="on" aria-pressed="true">Ontario</button>
+                <button type="button" data-prov="mb" aria-pressed="false">Manitoba</button>
+              </div>
+            </div>
+            <div>
+              <div class="field-label">
+                <label class="label" for="calc-size">Solar investment</label>
+                <output for="calc-size" data-calc-size>$1,000,000</output>
+              </div>
+              <input class="range" id="calc-size" type="range" min="100000" max="3000000" step="50000" value="1000000">
+              <div class="range-scale label"><span>$100K</span><span>$3M</span></div>
+              <div class="presets" role="group" aria-label="Typical project sizes">
+                <button type="button" data-preset="250000" aria-pressed="false">Small business · $250K</button>
+                <button type="button" data-preset="1000000" aria-pressed="true">Mid-size · $1M</button>
+                <button type="button" data-preset="2000000" aria-pressed="false">Municipal · $2M</button>
+              </div>
+            </div>
+            <p class="calc__note">Illustrative only. Scaled from SunFlow's 2025 reference proposals for a $1M commercial system in each province. Your numbers depend on eligibility, tax position and program windows — we confirm them in your free consultation.</p>
+          </div>
+          <div class="calc__output">
+            <div class="calc__hero">
+              <div>
+                <span class="label">Back in year one</span>
+                <div class="calc__total" data-calc-total aria-live="polite">$474,500</div>
+              </div>
+              <div class="calc__pct">
+                <strong data-calc-pct>47.5%</strong>
+                <span class="label">first-year return</span>
+              </div>
+            </div>
+            <div class="stackbar" data-calc-bar role="img" aria-label="First-year return broken down by incentive"></div>
+            <ul class="legend" role="list" data-calc-legend></ul>
+            <div class="calc__cta">
+              <p>Want the exact figure for your building? We'll model it in a free proposal.</p>
+              <a class="btn btn--dark" href="contact.html?service=commercial-solar" data-calc-link>Get my numbers <span class="btn__icon" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
+            </div>
+          </div>
+        </div>
