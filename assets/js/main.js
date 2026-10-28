@@ -115,10 +115,20 @@
       $(".menu-btn__label", menuBtn).textContent = open ? "Close" : "Menu";
     }
     if (menu) menu.toggleAttribute("inert", !open);
-    if (open) { header.classList.remove("is-hidden"); var first = $(".menu__link", menu); if (first) setTimeout(function () { first.focus(); }, 300); }
+    if (open) {
+      header.classList.remove("is-hidden");
+      // Move focus into the menu only for keyboard users; on touch it showed as a second highlight.
+      var first = $(".menu__link", menu);
+      if (first && menuByKeyboard) setTimeout(function () { first.focus({ preventScroll: true }); }, 300);
+    } else if (doc.activeElement && menu && menu.contains(doc.activeElement)) { doc.activeElement.blur(); }
   }
   if (menu) menu.setAttribute("inert", "");
-  if (menuBtn) menuBtn.addEventListener("click", function () { setMenu(!body.classList.contains("menu-open")); });
+  var menuByKeyboard = false;
+  if (menuBtn) {
+    menuBtn.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") menuByKeyboard = true; });
+    menuBtn.addEventListener("pointerdown", function () { menuByKeyboard = false; });
+    menuBtn.addEventListener("click", function () { setMenu(!body.classList.contains("menu-open")); });
+  }
   doc.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && body.classList.contains("menu-open")) { setMenu(false); menuBtn.focus(); }
   });

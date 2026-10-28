@@ -433,7 +433,8 @@ body.menu-open { overflow: hidden; }
   transition: color .3s, transform .5s var(--ease);
 }
 .menu__link small { font-family: var(--f-mono); font-size: var(--fs-label); letter-spacing: .08em; color: var(--on-dark-3); font-weight: 400; width: 2.4em; flex: none; transform: translateY(-1.6em); }
-.menu__link:hover, .menu__link[aria-current="page"] { color: var(--mint); transform: translateX(8px); }
+.menu__link[aria-current="page"] { color: var(--gold-light); }
+@media (hover: hover) and (pointer: fine) { .menu__link:hover { color: var(--gold-light); transform: translateX(8px); } }
 .menu__aside { display: flex; flex-direction: column; justify-content: flex-end; gap: var(--s-6); padding-bottom: var(--s-3); }
 .menu__aside a:not(.btn) { color: var(--on-dark-2); transition: color .3s; }
 .menu__aside a:not(.btn):hover { color: var(--on-dark); }
@@ -1412,7 +1413,7 @@ body.past-ticker .header, body.menu-open .header { top: 0; }
 .hero { padding-top: calc(var(--header-h) + var(--ticker-h) + var(--s-8)); }
 .page-hero { padding-top: calc(var(--header-h) + var(--ticker-h) + 72px); }
 .menu { padding-top: calc(var(--header-h) + var(--s-5)); }
-.menu__link:hover, .menu__link[aria-current="page"] { color: var(--gold-light); }
+.menu__link[aria-current="page"] { color: var(--gold-light); }
 
 /* ---------- Colour-blocked sections ---------- */
 .section { overflow: clip; }
@@ -1992,3 +1993,10 @@ body { overflow-x: hidden; overflow-x: clip; }
   .footer__bottom { padding-bottom: var(--s-4); }
 }
 .menu::before { inset: 0; width: auto; height: auto; right: 0; top: 0; max-width: none; background: radial-gradient(70vmax 70vmax at 100% 0%, rgba(217, 166, 78, .16), rgba(31, 156, 150, .06) 45%, transparent 70%); }
+
+/* ---------- Announcement bar: dark with gold text, so the phone's status bar stays dark ---------- */
+.ticker { background: var(--ink); color: var(--gold-light); border-bottom: 1px solid rgba(217, 166, 78, .22); }
+.ticker__track a, .ticker__track span { color: rgba(243, 238, 226, .78); font-weight: 500; }
+.ticker__track span::first-letter { color: var(--gold); }
+.ticker__track a { color: var(--gold-light); text-decoration-color: rgba(240, 206, 138, .5); }
+.menu__link:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 6px; }
