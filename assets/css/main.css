@@ -1944,3 +1944,15 @@ div.work__card .work__facts li { padding: 7px 13px; }
 .mega__row > span { will-change: transform; }
 .js:not(.has-gsap) .mega__row > span { animation: marquee 34s linear infinite; }
 @media (prefers-reduced-motion: reduce) { .mega__row > span { animation: none !important; } }
+
+/* ---------- Footer wordmark ---------- */
+.footer__word { margin-top: var(--s-9); user-select: none; overflow: hidden; padding-top: .06em; --sh: 0; }
+.fw { display: flex; width: max-content; font-family: var(--f-display); font-weight: 800; letter-spacing: -0.035em; line-height: .86; font-size: 22vw; }
+.fw__l { display: block; overflow: hidden; padding: 0 .015em .06em; margin: 0 -.015em; will-change: transform; }
+.fw__l > span {
+  display: block; transform-origin: 0 100%;
+  background-image: linear-gradient(100deg, #8a6a34 0%, #c99a4c 18%, #f0ce8a 36%, #fbe8b8 46%, #f0ce8a 56%, #d9a64e 74%, #8a6a34 100%);
+  background-size: calc(var(--W, 100%) * 1.6) 100%;
+  background-position: calc(-1 * var(--x, 0px) - var(--W, 0px) * .6 * var(--sh)) 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+}

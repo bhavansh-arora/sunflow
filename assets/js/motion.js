@@ -196,9 +196,43 @@
       gsap.fromTo(s, { yPercent: 22, scale: 0.85 }, { yPercent: 0, scale: 1, ease: "none", scrollTrigger: { trigger: s.closest("section"), start: "top bottom", end: "bottom bottom", scrub: true } });
     });
 
-    /* ---------- Footer wordmark ---------- */
-    var fw = $(".footer__word svg");
-    if (fw) gsap.fromTo(fw, { yPercent: 40, autoAlpha: 0.2 }, { yPercent: 0, autoAlpha: 1, ease: "none", scrollTrigger: { trigger: ".footer", start: "top 90%", end: "bottom bottom", scrub: true } });
+    /* ---------- Footer wordmark: letters rise in, shine sweeps, lift near the cursor ---------- */
+    var wm = $("[data-wordmark]");
+    if (wm) {
+      var row = $(".fw", wm), letters = $$(".fw__l > span", wm);
+      var fit = function () {
+        row.style.fontSize = "100px";
+        var w = row.scrollWidth;
+        row.style.fontSize = (100 * wm.clientWidth / w) + "px";
+        // one continuous gradient across all letters
+        var total = row.getBoundingClientRect().width, left = row.getBoundingClientRect().left;
+        letters.forEach(function (l) {
+          var r = l.getBoundingClientRect();
+          l.style.setProperty("--W", total + "px");
+          l.style.setProperty("--x", (r.left - left) + "px");
+        });
+      };
+      fit();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+      window.addEventListener("resize", fit);
+      gsap.set(letters, { yPercent: 105, rotate: 6 });
+      gsap.to(letters, { yPercent: 0, rotate: 0, ease: "expo.out", duration: 1.4, stagger: 0.07,
+        scrollTrigger: { trigger: wm, start: "top 92%" } });
+      var shine = { p: 0 };
+      gsap.to(shine, { p: 1, duration: 6, ease: "sine.inOut", repeat: -1, yoyo: true,
+        onUpdate: function () { wm.style.setProperty("--sh", shine.p); } });
+      if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        var lift = letters.map(function (l) { return gsap.quickTo(l.parentNode, "y", { duration: 0.6, ease: "power3.out" }); });
+        wm.addEventListener("pointermove", function (e) {
+          letters.forEach(function (l, k) {
+            var r = l.getBoundingClientRect(), cx = r.left + r.width / 2;
+            var d = Math.abs(e.clientX - cx) / r.width;
+            lift[k](-Math.max(0, 1 - d / 1.6) * r.height * 0.14);
+          });
+        });
+        wm.addEventListener("pointerleave", function () { lift.forEach(function (f) { f(0); }); });
+      }
+    }
 
     /* Images that load late change layout — keep triggers accurate. */
     window.addEventListener("load", function () { ST.refresh(); });
