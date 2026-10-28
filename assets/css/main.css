@@ -1980,3 +1980,15 @@ div.work__card .work__facts li { padding: 7px 13px; }
 .hscroll .hscroll__pin { position: relative; margin-inline: clamp(8px, 1.1vw, 16px); border-radius: clamp(18px, 2vw, 28px); padding-block: var(--section); overflow: hidden; }
 .hscroll.section--navy .hscroll__pin { background: var(--navy); }
 .hscroll.section--forest .hscroll__pin { background: var(--forest); }
+
+/* ---------- Mobile fixes: menu, ticker, footer under the quote bar ---------- */
+.menu { overflow-x: hidden; }
+.menu::before { right: -20vmax; max-width: 100vw; }
+body.menu-open .ticker { transform: translateY(-100%); }
+body.menu-open .header { top: 0; }
+body { overflow-x: hidden; overflow-x: clip; }
+@media (max-width: 760px) {
+  .footer { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+  .footer__bottom { padding-bottom: var(--s-4); }
+}
+.menu::before { inset: 0; width: auto; height: auto; right: 0; top: 0; max-width: none; background: radial-gradient(70vmax 70vmax at 100% 0%, rgba(217, 166, 78, .16), rgba(31, 156, 150, .06) 45%, transparent 70%); }
