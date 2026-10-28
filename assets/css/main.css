@@ -1875,3 +1875,46 @@ body.past-ticker .header, body.menu-open .header { top: 0; }
   .work__card:not(.work__card--lg) .work__sub { display: block; }
 }
 @media (min-width: 901px) and (max-width: 1280px) { .work__card:not(.work__card--lg) .work__facts { display: none; } }
+
+/* ---------- Photo-card grid (projects, luxury, roofing) ---------- */
+.work--grid { height: auto; grid-template-rows: none; grid-auto-rows: clamp(250px, 29vh, 310px); grid-auto-flow: dense; }
+.work--grid .work__card { grid-column: span 6; grid-row: span 2; }
+.work--grid .w-c4 { grid-column: span 4; }
+.work--grid .w-c5 { grid-column: span 5; }
+.work--grid .w-c6 { grid-column: span 6; }
+.work--grid .w-c7 { grid-column: span 7; }
+.work--grid .w-c8 { grid-column: span 8; }
+.work--grid .w-c12 { grid-column: 1 / -1; }
+.work--grid .work__card .work__sub { display: block; }
+.work--grid .w-c4 .work__sub { display: none; }
+.work--grid .w-c7 .work__title, .work--grid .w-c8 .work__title { font-size: clamp(1.9rem, 3vw, 3rem); }
+.work--grid.is-filtered .work__card { grid-column: span 6; }
+.work__card.is-hidden { display: none; }
+div.work__card { cursor: default; }
+div.work__card .work__body { padding-right: 0; }
+div.work__card .work__facts li { padding: 7px 13px; }
+.work--grid .work__card { opacity: 1; }
+@media (max-width: 1100px) and (min-width: 901px) {
+  .work--grid .w-c4 { grid-column: span 6; }
+  .work--grid .w-c5, .work--grid .w-c7, .work--grid .w-c8 { grid-column: span 6; }
+}
+@media (max-width: 900px) {
+  .work--grid { grid-auto-rows: auto; }
+  .work--grid .work__card, .work--grid.is-filtered .work__card { grid-column: 1 / -1; grid-row: auto; min-height: 440px; }
+  .work--grid .w-c4 .work__sub { display: block; }
+}
+.work__card::after { background: linear-gradient(180deg, rgba(11,16,19,.5) 0%, rgba(11,16,19,0) 26%, rgba(11,16,19,.18) 44%, rgba(11,16,19,.78) 70%, rgba(11,16,19,.96) 100%); }
+.work__body .label, .work__title, .work__sub { text-shadow: 0 1px 14px rgba(0,0,0,.45); }
+@media (max-width: 640px) {
+  .work, .work--grid { gap: 14px; }
+  .work__card, .work--grid .work__card, .work--grid.is-filtered .work__card, .work__card--lg { min-height: 0; padding: 0; justify-content: flex-start; background: var(--ink-2); }
+  .work__img { position: relative; z-index: 0; height: 250px; transform: none; flex: none; }
+  .work__card::after { display: none; }
+  .work__top { position: absolute; z-index: 1; top: 14px; left: 14px; right: 14px; }
+  .work__body { padding: 20px 20px 22px; padding-right: 84px; max-width: none; }
+  .work__body .label, .work__title, .work__sub { text-shadow: none; }
+  .work__title, .work__card--lg .work__title, .work--grid .w-c7 .work__title, .work--grid .w-c8 .work__title { font-size: 1.6rem; }
+  .work__facts li { background: rgba(243,238,226,.05); }
+  .work__go { bottom: auto; top: 222px; right: 18px; background: var(--gold); border-color: var(--gold); color: #1a1204; }
+  div.work__card .work__body { padding-right: 20px; }
+}

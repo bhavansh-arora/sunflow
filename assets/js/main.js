@@ -372,6 +372,7 @@
       b.addEventListener("click", function () {
         var f = b.getAttribute("data-filter");
         $$("button", group).forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        target.classList.toggle("is-filtered", f !== "all");
         $$("[data-tags]", target).forEach(function (card) {
           card.classList.toggle("is-hidden", f !== "all" && card.getAttribute("data-tags").split(" ").indexOf(f) < 0);
         });
