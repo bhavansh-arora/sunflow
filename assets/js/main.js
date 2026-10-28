@@ -43,7 +43,7 @@
 
   /* ---------- Header: solid on scroll, hides going down ---------- */
   var header = $("#header"), lastY = window.scrollY, ticking = false;
-  var actionbar = $(".actionbar");
+  var actionbar = $(".actionbar"), fab = $(".fab");
   function onScroll() {
     var y = window.scrollY;
     if (header) {
@@ -54,6 +54,8 @@
       }
     }
     if (actionbar) actionbar.classList.toggle("is-on", y > window.innerHeight * 0.7);
+    body.classList.toggle("past-ticker", y > 30);
+    if (fab) fab.classList.toggle("is-on", y > window.innerHeight * 0.6);
     lastY = y; ticking = false;
   }
   window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
@@ -77,6 +79,15 @@
   });
   $$(".menu a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
   window.addEventListener("resize", function () { if (window.innerWidth > 1180 && body.classList.contains("menu-open")) setMenu(false); });
+
+  /* ---------- Faint section numerals, read from the "(01) —" labels ---------- */
+  $$(".section").forEach(function (sec) {
+    var eb = $(".sec-head .eyebrow, .split__body > .eyebrow, .drag-hint .eyebrow, .impact--intro .eyebrow, .founder__body > .eyebrow", sec);
+    var m = eb && eb.textContent.match(/\((\d{2})\)/);
+    if (!m || $(".sec-num", sec)) return;
+    var n = doc.createElement("span"); n.className = "sec-num"; n.setAttribute("aria-hidden", "true"); n.textContent = m[1];
+    sec.insertBefore(n, sec.firstChild);
+  });
 
   /* ---------- First-touch attribution (sent with quote requests) ---------- */
   (function attribution() {

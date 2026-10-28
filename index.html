@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="assets/css/main.css">
   <script>
     (function (h) {
@@ -103,6 +103,10 @@
         <span class="preloader__count">000</span>
       </div>
     </div>
+  </div>
+
+  <div class="ticker" role="region" aria-label="Announcement">
+    <div class="ticker__track"><span>✦ Free consultations — no obligation</span><span>✦ Up to 72% back in year one on commercial solar</span><a href="contact.html">Book yours →</a><span>✦ 100% Canadian · BBB A+</span><span>✦ Free consultations — no obligation</span><span>✦ Up to 72% back in year one on commercial solar</span><a href="contact.html">Book yours →</a><span>✦ 100% Canadian · BBB A+</span><span>✦ Free consultations — no obligation</span><span>✦ Up to 72% back in year one on commercial solar</span><a href="contact.html">Book yours →</a><span>✦ 100% Canadian · BBB A+</span><span>✦ Free consultations — no obligation</span><span>✦ Up to 72% back in year one on commercial solar</span><a href="contact.html">Book yours →</a><span>✦ 100% Canadian · BBB A+</span></div>
   </div>
 
   <header class="header" id="header">
@@ -225,9 +229,23 @@
         </h1>
         <div class="hero__row">
           <p class="lead" data-hero-fade>100% Canadian solar, roofing and luxury exteriors. One crew from inspection to final panel — and incentives that can return up to 70% in year one.</p>
-          <div class="btn-row" data-hero-fade>
-            <a class="btn btn--grad" href="contact.html" data-quote-link>Get my free quote <span class="btn__icon" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
-            <a class="btn btn--ghost" href="#savings">See what I'd save</a>
+          <div class="hero-start" data-hero-fade>
+            <form class="hero-form" action="contact.html" method="get">
+              <label class="sr-only" for="hero-service">What do you need?</label>
+              <select id="hero-service" name="service">
+                <option value="commercial-solar">Commercial solar</option>
+                <option value="residential-solar">Residential solar</option>
+                <option value="roofing">Roofing</option>
+                <option value="luxury">Luxury exteriors</option>
+                <option value="insulation">Insulation</option>
+              </select>
+              <button class="btn btn--grad" type="submit">Start my quote <span class="btn__icon" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></button>
+            </form>
+            <ul class="hero-checks" role="list">
+              <li><svg class="icon"><use href="#i-check"/></svg>Free consultation</li>
+              <li><svg class="icon"><use href="#i-check"/></svg>100% Canadian crew</li>
+              <li><svg class="icon"><use href="#i-check"/></svg>Incentives handled</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -267,7 +285,7 @@
     </div>
 
     <!-- 01 Why SunFlow -->
-    <section class="section section--paper" aria-labelledby="why-title">
+    <section class="section section--forest" aria-labelledby="why-title">
       <div class="container">
         <div class="sec-head">
           <div class="sec-head__meta"><span class="eyebrow">(01) — <b>Why SunFlow</b></span></div>
@@ -369,7 +387,7 @@
     </section>
 
     <!-- 03 Savings -->
-    <section class="section section--brand" id="savings" aria-labelledby="savings-title">
+    <section class="section section--ember" id="savings" aria-labelledby="savings-title">
       <div class="container">
         <div class="sec-head sec-head--split">
           <div class="sec-head__meta"><span class="eyebrow">(03) — <b>The numbers</b></span></div>
@@ -477,7 +495,7 @@
     </section>
 
     <!-- 05 Impacts -->
-    <section class="section section--paper hscroll" data-hscroll aria-labelledby="impacts-title">
+    <section class="section section--navy hscroll" data-hscroll aria-labelledby="impacts-title">
       <div class="hscroll__pin">
         <div class="hscroll__track">
           <div class="impact impact--intro">
@@ -535,7 +553,7 @@
     </section>
 
     <!-- 07 Founder -->
-    <section class="section section--paper" aria-labelledby="founder-title">
+    <section class="section section--forest" aria-labelledby="founder-title">
       <div class="container">
         <div class="founder">
           <div class="founder__media" data-reveal>
@@ -559,7 +577,7 @@
     </section>
 
     <!-- Community -->
-    <section class="section section--white section--tight" aria-labelledby="community-title">
+    <section class="section section--navy section--tight" aria-labelledby="community-title">
       <div class="container">
         <div class="sec-head sec-head--split">
           <div class="sec-head__meta"><span class="eyebrow">SunFlow is <b>community</b></span></div>
@@ -579,7 +597,7 @@
       <div class="mega__row mega__row--outline" data-mega="1"><span>Solar <svg class="mega__star"><use href="#i-star"/></svg> Roofing <svg class="mega__star"><use href="#i-star"/></svg> Exteriors <svg class="mega__star"><use href="#i-star"/></svg> Solar <svg class="mega__star"><use href="#i-star"/></svg> Roofing <svg class="mega__star"><use href="#i-star"/></svg> Exteriors <svg class="mega__star"><use href="#i-star"/></svg></span></div>
     </div>
     <section class="cta" aria-labelledby="cta-title">
-      <div class="cta__rays" aria-hidden="true"></div>
+      <div class="cta__bg" aria-hidden="true"><img src="assets/img/installer.webp" alt="" width="1920" height="1281" loading="lazy"></div>
       <div class="cta__sun" aria-hidden="true" data-sunrise></div>
       <div class="container">
         <span class="eyebrow">Don't wait to get started</span>
@@ -659,7 +677,7 @@
         <svg viewBox="0 0 1000 205" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="fw" x1="0" x2="1" y1="0" y2="0">
-              <stop offset="0" stop-color="#1ecbb5"/><stop offset="1" stop-color="#1ecbb5"/>
+              <stop offset="0" stop-color="#8a6a34"/><stop offset=".45" stop-color="#f0ce8a"/><stop offset=".72" stop-color="#d9a64e"/><stop offset="1" stop-color="#8a6a34"/>
             </linearGradient>
           </defs>
           <text x="500" y="190" text-anchor="middle" font-size="248" fill="url(#fw)" textLength="996" lengthAdjust="spacing">SunFlow</text>
@@ -690,6 +708,11 @@
       <p class="modal__caption"></p>
     </div>
   </div>
+
+  <a class="fab" href="contact.html" data-quote-link aria-label="Get your free quote">
+    <svg class="fab__ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="fab-path" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#fab-path" textLength="498">Get your free quote ✦ Get your free quote ✦ </textPath></text></svg>
+    <span class="fab__core" aria-hidden="true"><svg class="icon"><use href="#i-arrow-ur"/></svg></span>
+  </a>
 
   <div class="cursor" aria-hidden="true"><span>View</span></div>
   <div class="tip" role="status" aria-live="polite"></div>

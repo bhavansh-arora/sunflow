@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="assets/css/main.css">
   <script>
     (function (h) {
@@ -52,6 +52,7 @@
   <a class="skip" href="#main">Skip to content</a>
   {{> icons}}
   {{> preloader}}
+  {{> ticker}}
   {{> header}}
   {{> menu}}
 
@@ -73,6 +74,11 @@
       <p class="modal__caption"></p>
     </div>
   </div>
+
+  <a class="fab" href="contact.html" data-quote-link aria-label="Get your free quote">
+    <svg class="fab__ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="fab-path" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#fab-path" textLength="498">Get your free quote ✦ Get your free quote ✦ </textPath></text></svg>
+    <span class="fab__core" aria-hidden="true"><svg class="icon"><use href="#i-arrow-ur"/></svg></span>
+  </a>
 
   <div class="cursor" aria-hidden="true"><span>View</span></div>
   <div class="tip" role="status" aria-live="polite"></div>
