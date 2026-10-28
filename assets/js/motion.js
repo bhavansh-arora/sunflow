@@ -113,11 +113,22 @@
       gsap.to(".page-hero .hero-media", { yPercent: 10, ease: "none", scrollTrigger: { trigger: ".page-hero", start: "top top", end: "bottom top", scrub: true } });
     }
 
-    /* ---------- Mega words slide with scroll ---------- */
+    /* ---------- Mega words: always moving, faster as you scroll ---------- */
     $$("[data-mega]").forEach(function (row) {
-      var dir = +row.getAttribute("data-mega");
-      gsap.fromTo(row, { xPercent: dir > 0 ? -28 : 0 }, { xPercent: dir > 0 ? 0 : -28, ease: "none",
-        scrollTrigger: { trigger: row.closest(".mega"), start: "top bottom", end: "bottom top", scrub: 0.4 } });
+      var track = row.firstElementChild;
+      if (!track) return;
+      var loop = gsap.to(track, { xPercent: -50, duration: 34, ease: "none", repeat: -1 });
+      var boost = { v: 1 };
+      ST.create({
+        trigger: row.closest(".mega"), start: "top bottom", end: "bottom top",
+        onUpdate: function (self) {
+          var v = self.getVelocity() / 160, dir = self.direction;
+          loop.timeScale(dir * Math.min(6, 1 + Math.abs(v)));
+          gsap.killTweensOf(boost);
+          boost.v = loop.timeScale();
+          gsap.to(boost, { v: dir, duration: 1.1, ease: "power2.out", onUpdate: function () { loop.timeScale(boost.v); } });
+        }
+      });
     });
 
     $$("[data-clip]").forEach(function (el) {

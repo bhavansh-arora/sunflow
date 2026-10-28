@@ -1939,3 +1939,8 @@ div.work__card .work__facts li { padding: 7px 13px; }
 .ptx-start .ptx__title span { transform: none; transition: none; }
 .ptx.is-out .ptx__title span { transform: translateY(-110%); transition: transform .5s var(--ease-in-out); }
 .ptx__tag { font-family: var(--f-mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
+
+/* Mega words fallback when scroll animation is off */
+.mega__row > span { will-change: transform; }
+.js:not(.has-gsap) .mega__row > span { animation: marquee 34s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .mega__row > span { animation: none !important; } }
