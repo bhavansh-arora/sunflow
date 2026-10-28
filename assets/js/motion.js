@@ -61,39 +61,56 @@
     });
   });
 
+  /* ---------- Set every intro's starting state now, before the first frame,
+     so nothing is drawn in its final position and then snapped back. ---------- */
+  var heroTitle = $("[data-hero-title]"), heroLines = [];
+  if (heroTitle) {
+    $$(".line", heroTitle).forEach(function (l) {
+      var inner = document.createElement("span");
+      inner.style.display = "inline-block";
+      while (l.firstChild) inner.appendChild(l.firstChild);
+      l.appendChild(inner);
+      l.style.overflow = "hidden"; l.style.paddingBottom = ".06em"; l.style.marginBottom = "-.06em";
+      heroLines.push(inner);
+    });
+    gsap.set(heroLines, { yPercent: 115 });
+    gsap.set("[data-hero-img]", { scale: 1.18 });
+    gsap.set($$(".hero [data-hero-fade]"), { autoAlpha: 0, y: 24 });
+  }
+  var ph = $(".page-hero"), pageWords = [], phImg = $(".page-hero .hero-media img");
+  if (ph) {
+    var pt = $("[data-page-title]", ph);
+    pageWords = pt ? splitWords(pt) : [];
+    gsap.set(pageWords, { yPercent: 115 });
+    gsap.set($$("[data-hero-fade]", ph), { autoAlpha: 0, y: 24 });
+    if (phImg) gsap.set(phImg, { scale: 1.18 });
+  }
+  var splitSets = $$("[data-split]").map(function (el) {
+    var w = splitWords(el);
+    gsap.set(w, { yPercent: 115 });
+    return { el: el, words: w };
+  });
+
   SF.whenReady(function () {
     /* ---------- Hero (home) ---------- */
-    var heroTitle = $("[data-hero-title]");
     if (heroTitle) {
-      var lines = $$(".line", heroTitle);
-      lines.forEach(function (l) {
-        var inner = document.createElement("span");
-        inner.style.display = "inline-block";
-        while (l.firstChild) inner.appendChild(l.firstChild);
-        l.appendChild(inner);
-        l.style.overflow = "hidden"; l.style.paddingBottom = ".06em"; l.style.marginBottom = "-.06em";
-      });
-      var tl = gsap.timeline({ defaults: { ease: EASE } });
-      tl.fromTo("[data-hero-img]", { scale: 1.18 }, { scale: 1.06, duration: 2.4 }, 0)
-        .fromTo(lines.map(function (l) { return l.firstChild; }), { yPercent: 115 }, { yPercent: 0, duration: 1.4, stagger: 0.12 }, 0.1)
-        .fromTo("[data-hero-fade]", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 1.2, stagger: 0.1 }, 0.5);
-      gsap.to("[data-hero-img]", { yPercent: 12, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+      gsap.timeline({ defaults: { ease: EASE } })
+        .to("[data-hero-img]", { scale: 1.06, duration: 2.4 }, 0)
+        .to(heroLines, { yPercent: 0, duration: 1.4, stagger: 0.12 }, 0.1)
+        .to($$(".hero [data-hero-fade]"), { autoAlpha: 1, y: 0, duration: 1.2, stagger: 0.1 }, 0.5);
+      gsap.to(".hero__media", { yPercent: 12, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
       gsap.to(".hero__content", { yPercent: -18, autoAlpha: 0.2, ease: "none", scrollTrigger: { trigger: ".hero", start: "40% top", end: "bottom top", scrub: true } });
     }
 
     /* ---------- Inner page hero ---------- */
-    var ph = $(".page-hero");
     if (ph) {
-      var t = $("[data-page-title]", ph);
-      var words = t ? splitWords(t) : [];
       gsap.timeline({ defaults: { ease: EASE } })
-        .fromTo(words, { yPercent: 115 }, { yPercent: 0, duration: 1.3, stagger: 0.05 }, 0.05)
-        .fromTo($$("[data-hero-fade]", ph), { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 1.1, stagger: 0.08 }, 0.35);
+        .to(pageWords, { yPercent: 0, duration: 1.3, stagger: 0.05 }, 0.05)
+        .to($$("[data-hero-fade]", ph), { autoAlpha: 1, y: 0, duration: 1.1, stagger: 0.08 }, 0.35);
     }
-    var phImg = $(".page-hero .hero-media img");
     if (phImg) {
-      gsap.fromTo(phImg, { scale: 1.18 }, { scale: 1.04, duration: 2.4, ease: EASE });
-      gsap.to(phImg, { yPercent: 10, ease: "none", scrollTrigger: { trigger: ".page-hero", start: "top top", end: "bottom top", scrub: true } });
+      gsap.to(phImg, { scale: 1.04, duration: 2.4, ease: EASE });
+      gsap.to(".page-hero .hero-media", { yPercent: 10, ease: "none", scrollTrigger: { trigger: ".page-hero", start: "top top", end: "bottom top", scrub: true } });
     }
 
     /* ---------- Mega words slide with scroll ---------- */
@@ -113,9 +130,8 @@
     });
 
     /* ---------- Headings: words rise in ---------- */
-    $$("[data-split]").forEach(function (el) {
-      var w = splitWords(el);
-      gsap.fromTo(w, { yPercent: 115 }, { yPercent: 0, duration: 1.2, ease: EASE, stagger: 0.04, scrollTrigger: { trigger: el, start: "top 88%" } });
+    splitSets.forEach(function (o) {
+      gsap.to(o.words, { yPercent: 0, duration: 1.2, ease: EASE, stagger: 0.04, scrollTrigger: { trigger: o.el, start: "top 88%" } });
     });
 
     /* ---------- Fade-up blocks ---------- */
