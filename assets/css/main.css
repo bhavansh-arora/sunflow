@@ -1716,14 +1716,6 @@ body.past-ticker .header, body.menu-open .header { top: 0; }
 .cursor.is-view::after { opacity: 0; }
 .cursor span { position: relative; z-index: 1; color: #1a1204; }
 
-.ptx { position: fixed; inset: 0; z-index: 990; pointer-events: none; }
-.ptx__panel { position: absolute; inset: 0; background: radial-gradient(60% 50% at 50% 50%, rgba(217,166,78,.12), transparent 70%), var(--ink); transform: scaleY(0); transform-origin: top; transition: transform .7s var(--ease-in-out); }
-.ptx.is-in .ptx__panel { transform: scaleY(1); transform-origin: bottom; transition-duration: .55s; }
-.ptx-start .ptx__panel { transform: scaleY(1); transition: none; }
-.ptx__mark { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; opacity: 0; transition: opacity .3s; }
-.ptx.is-in .ptx__mark, .ptx-start .ptx__mark { opacity: 1; }
-.ptx__logo { width: 180px; height: 107px; background: var(--grad); -webkit-mask: url("../img/logo-stacked-white.png") center / contain no-repeat; mask: url("../img/logo-stacked-white.png") center / contain no-repeat; }
-.ptx__tag { font-family: var(--f-mono); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: rgba(243,238,226,.55); }
 @media (prefers-reduced-motion: reduce) { .ptx { display: none; } }
 
 /* ---------- Branded loader ---------- */
@@ -1918,3 +1910,32 @@ div.work__card .work__facts li { padding: 7px 13px; }
   .work__go { bottom: auto; top: 222px; right: 18px; background: var(--gold); border-color: var(--gold); color: #1a1204; }
   div.work__card .work__body { padding-right: 20px; }
 }
+
+/* ---------- Page transition ---------- */
+.ptx { position: fixed; inset: 0; z-index: 990; pointer-events: none; }
+.ptx.is-in { pointer-events: auto; }
+.ptx__cols { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(5, 1fr); }
+.ptx__cols i { display: block; margin-right: -1px; transform: translateY(101%); transition: transform .62s cubic-bezier(.76, 0, .24, 1); transition-delay: calc(var(--k) * 45ms); }
+.ptx__cols--gold i { background: linear-gradient(180deg, var(--gold-light), var(--gold) 60%, #b98a3c); }
+.ptx__cols--ink i { background: radial-gradient(120% 60% at 50% 50%, #121b20, var(--ink)); transition-delay: calc(var(--k) * 45ms + 110ms); }
+/* leaving: columns rise from the bottom, gold first */
+.ptx.is-in .ptx__cols i { transform: translateY(0); }
+/* arriving: already covering */
+.ptx-start .ptx__cols i { transform: translateY(0); transition: none; }
+/* lifting: columns leave through the top, ink first, gold trailing */
+.ptx.is-out .ptx__cols i { transform: translateY(-101%); transition-duration: .78s; }
+.ptx.is-out .ptx__cols--ink i { transition-delay: calc(var(--k) * 55ms); }
+.ptx.is-out .ptx__cols--gold i { transition-delay: calc(var(--k) * 55ms + 120ms); }
+.ptx.is-reset .ptx__cols i, .ptx.is-reset .ptx__mark, .ptx.is-reset .ptx__mark * { transition: none !important; }
+
+.ptx__mark { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; opacity: 0; transition: opacity .3s; }
+.ptx.is-in .ptx__mark { opacity: 1; transition-delay: .42s; }
+.ptx-start .ptx__mark { opacity: 1; transition: none; }
+.ptx.is-out .ptx__mark { opacity: 0; transition: opacity .3s; }
+.ptx__wave { width: 64px; aspect-ratio: 813 / 599; background: var(--shimmer); background-size: 260% 100%; animation: shimmer 2.4s ease-in-out infinite; -webkit-mask: url("../img/logo-mark-hd.png") center / contain no-repeat; mask: url("../img/logo-mark-hd.png") center / contain no-repeat; }
+.ptx__title { display: block; overflow: hidden; padding: 0 .1em .08em; }
+.ptx__title span { display: block; font-family: var(--f-display); font-weight: 800; font-size: clamp(2.4rem, 6vw, 5.4rem); letter-spacing: -0.04em; line-height: 1; color: var(--paper); transform: translateY(110%); transition: transform .7s var(--ease); }
+.ptx.is-in .ptx__title span { transform: none; transition-delay: .46s; }
+.ptx-start .ptx__title span { transform: none; transition: none; }
+.ptx.is-out .ptx__title span { transform: translateY(-110%); transition: transform .5s var(--ease-in-out); }
+.ptx__tag { font-family: var(--f-mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }

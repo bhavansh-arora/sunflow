@@ -20,12 +20,30 @@
   };
   function ready() { if (isReady) return; isReady = true; readyFns.forEach(function (f) { f(); }); }
 
-  /* ---------- Page curtain: lifts on arrival, drops before leaving ---------- */
-  var ptx = $(".ptx");
-  if (html.classList.contains("ptx-start")) {
-    requestAnimationFrame(function () { requestAnimationFrame(function () { html.classList.remove("ptx-start"); }); });
+  /* ---------- Page transition: gold + ink columns, destination name ---------- */
+  var ptx = $(".ptx"), ptxTitle = $("[data-ptx-title]");
+  var PAGE_NAMES = {
+    "": "Home", "index": "Home", "commercial-solar": "Commercial Solar", "residential-solar": "Residential Solar",
+    "roofing": "Roofing", "luxury-exteriors": "Luxury Exteriors", "insulation": "Insulation", "incentives": "Incentives",
+    "projects": "Projects", "spadina-museum": "Spadina Museum", "toronto-residence": "Toronto Residence",
+    "about": "About SunFlow", "resources": "Resources", "contact": "Your Free Quote", "privacy": "Privacy"
+  };
+  function ptxReset() {
+    if (!ptx) return;
+    ptx.classList.add("is-reset");
+    ptx.classList.remove("is-in", "is-out");
+    void ptx.offsetWidth;
+    ptx.classList.remove("is-reset");
   }
-  window.addEventListener("pageshow", function (e) { if (e.persisted && ptx) ptx.classList.remove("is-in"); });
+  if (ptx && html.classList.contains("ptx-start")) {
+    // Arriving through the curtain: hold briefly on the destination name, then lift.
+    setTimeout(function () {
+      ptx.classList.add("is-out");
+      html.classList.remove("ptx-start");
+      setTimeout(ptxReset, 1400);
+    }, 260);
+  }
+  window.addEventListener("pageshow", function (e) { if (e.persisted) { html.classList.remove("ptx-start"); ptxReset(); } });
   doc.addEventListener("click", function (e) {
     if (reduce || !ptx || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     var a = e.target.closest && e.target.closest("a[href]");
@@ -35,16 +53,20 @@
     var url = new URL(a.href, location.href);
     if (url.origin !== location.origin || (url.pathname === location.pathname && url.hash)) return;
     e.preventDefault();
-    try { window.sessionStorage.setItem("sf-ptx", "1"); } catch (err) {}
-    ptx.classList.add("is-in");
-    setTimeout(function () { location.href = url.href; }, 560);
+    var slug = url.pathname.split("/").pop().replace(/\.html$/, "");
+    var name = PAGE_NAMES[slug] || "SunFlow";
+    if (ptxTitle) ptxTitle.textContent = name;
+    try { window.sessionStorage.setItem("sf-ptx", name); } catch (err) {}
+    ptxReset();
+    requestAnimationFrame(function () { ptx.classList.add("is-in"); });
+    setTimeout(function () { location.href = url.href; }, 900);
   });
 
   /* ---------- Preloader: first visit per session only ---------- */
   (function preloader() {
     var el = $("#preloader");
     if (!el || !html.classList.contains("is-preloading")) {
-      if (html.classList.contains("ptx-start")) setTimeout(ready, 380); else ready();
+      if (html.classList.contains("ptx-start")) setTimeout(ready, 520); else ready();
       return;
     }
     store.set("sf-loaded", "1");
