@@ -201,15 +201,16 @@
     if (wm) {
       var row = $(".fw", wm), letters = $$(".fw__l > span", wm);
       var fit = function () {
+        // Layout positions (offsetLeft/Width) ignore the rise-in transforms.
+        var xs = function () { return letters.map(function (l) { return { x: l.parentNode.offsetLeft + l.offsetLeft, w: l.offsetWidth }; }); };
         row.style.fontSize = "100px";
-        var w = row.scrollWidth;
-        row.style.fontSize = (100 * wm.clientWidth / w) + "px";
-        // one continuous gradient across all letters
-        var total = row.getBoundingClientRect().width, left = row.getBoundingClientRect().left;
-        letters.forEach(function (l) {
-          var r = l.getBoundingClientRect();
+        var p = xs(), ink = p[p.length - 1].x + p[p.length - 1].w - p[0].x;
+        row.style.fontSize = (100 * wm.clientWidth / ink) + "px";
+        p = xs();
+        var total = p[p.length - 1].x + p[p.length - 1].w - p[0].x;
+        letters.forEach(function (l, k) {
           l.style.setProperty("--W", total + "px");
-          l.style.setProperty("--x", (r.left - left) + "px");
+          l.style.setProperty("--x", (p[k].x - p[0].x) + "px");
         });
       };
       fit();

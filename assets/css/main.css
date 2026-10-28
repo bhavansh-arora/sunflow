@@ -1968,3 +1968,15 @@ div.work__card .work__facts li { padding: 7px 13px; }
 .footer__word.is-in .fw__l { overflow: visible; }
 .footer__word.is-in .fw__l::before { opacity: calc(var(--g) * .9); transition: none; }
 .footer__word { overflow: visible; }
+/* Letter masks wide enough for each glyph; tracking comes from margins, not letter-spacing */
+.fw { letter-spacing: 0; }
+.fw__l { padding: 0 .1em .06em; margin: 0 -.1em; }
+.fw__l + .fw__l { margin-left: calc(-.1em - .028em); }
+.fw__l > span { letter-spacing: 0; }
+/* The pinned Impacts block keeps its side margins without widening the page */
+
+/* Pinned Impacts: the pinned section is full width; the rounded colour block is an inner layer */
+.hscroll.section--navy, .hscroll.section--forest { margin-inline: 0; border-radius: 0; background: transparent; padding-block: 0; }
+.hscroll .hscroll__pin { position: relative; margin-inline: clamp(8px, 1.1vw, 16px); border-radius: clamp(18px, 2vw, 28px); padding-block: var(--section); overflow: hidden; }
+.hscroll.section--navy .hscroll__pin { background: var(--navy); }
+.hscroll.section--forest .hscroll__pin { background: var(--forest); }
