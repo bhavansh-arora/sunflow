@@ -252,6 +252,17 @@
     list.addEventListener("pointerleave", function () { box.classList.remove("is-on"); cancelAnimationFrame(raf); });
   })();
 
+  /* ---------- Spotlight follows the pointer on cards ---------- */
+  if (fine) {
+    doc.addEventListener("pointermove", function (e) {
+      var card = e.target.closest && e.target.closest(".feature, .program, .step");
+      if (!card) return;
+      var r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      card.style.setProperty("--my", (e.clientY - r.top) + "px");
+    }, { passive: true });
+  }
+
   /* ---------- Cursor ---------- */
   (function cursor() {
     var c = $(".cursor");

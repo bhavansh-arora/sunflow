@@ -212,6 +212,11 @@
         <img src="assets/img/hero-sunset.webp" srcset="assets/img/hero-sunset-sm.webp 960w, assets/img/hero-sunset.webp 1920w" sizes="100vw" alt="" width="1920" height="1023" fetchpriority="high" data-hero-img>
       </div>
       <div class="hero__glow" aria-hidden="true"></div>
+      <div class="spin-badge" aria-hidden="true">
+          <svg class="spin-badge__ring" viewBox="0 0 200 200"><defs><path id="spin-path" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#spin-path" textLength="498">Free consultation ✦ 100% Canadian ✦ Think global ✦ </textPath></text></svg>
+          <span class="spin-badge__core"><svg class="icon"><use href="#i-sun"/></svg></span>
+        </div>
+
       <div class="container hero__content">
         <span class="eyebrow hero__tag" data-hero-fade>Solar · Roofing · Exteriors — <b>Barrie, ON &amp; Manitoba</b></span>
         <h1 class="display hero__title" id="hero-title" data-hero-title>
@@ -291,6 +296,15 @@
       </div>
     </section>
 
+    <section class="bigstats" aria-label="SunFlow by the numbers">
+      <div class="container bigstats__grid">
+        <div class="bigstat" data-reveal><span class="bigstat__num"><span data-count="70">70</span><small>%</small></span><span class="bigstat__label"><span>Year one</span>back on a Manitoba commercial install*</span></div>
+        <div class="bigstat" data-reveal><span class="bigstat__num">$<span data-count="11.76" data-decimals="2">11.76</span><small>M</small></span><span class="bigstat__label"><span>Real client</span>saved by year 30 on a $924K array</span></div>
+        <div class="bigstat" data-reveal><span class="bigstat__num"><span data-count="210">210</span><small>km/h</small></span><span class="bigstat__label"><span>Roofing</span>winds our roofs have stood up to</span></div>
+        <div class="bigstat" data-reveal><span class="bigstat__num"><span data-count="10">10</span><small>+</small></span><span class="bigstat__label"><span>Since day one</span>years installing solar in Canada</span></div>
+      </div>
+    </section>
+
     <!-- 02 Services -->
     <section class="section" aria-labelledby="services-title">
       <div class="container">
@@ -355,7 +369,7 @@
     </section>
 
     <!-- 03 Savings -->
-    <section class="section section--paper" id="savings" aria-labelledby="savings-title">
+    <section class="section section--brand" id="savings" aria-labelledby="savings-title">
       <div class="container">
         <div class="sec-head sec-head--split">
           <div class="sec-head__meta"><span class="eyebrow">(03) — <b>The numbers</b></span></div>
@@ -560,6 +574,10 @@
       </div>
     </section>
 
+    <div class="mega" aria-hidden="true">
+      <div class="mega__row" data-mega="-1"><span>Think global <svg class="mega__star"><use href="#i-star"/></svg> <em>act local</em> <svg class="mega__star"><use href="#i-star"/></svg> Think global <svg class="mega__star"><use href="#i-star"/></svg> <em>act local</em> <svg class="mega__star"><use href="#i-star"/></svg></span></div>
+      <div class="mega__row mega__row--outline" data-mega="1"><span>Solar <svg class="mega__star"><use href="#i-star"/></svg> Roofing <svg class="mega__star"><use href="#i-star"/></svg> Exteriors <svg class="mega__star"><use href="#i-star"/></svg> Solar <svg class="mega__star"><use href="#i-star"/></svg> Roofing <svg class="mega__star"><use href="#i-star"/></svg> Exteriors <svg class="mega__star"><use href="#i-star"/></svg></span></div>
+    </div>
     <section class="cta" aria-labelledby="cta-title">
       <div class="cta__rays" aria-hidden="true"></div>
       <div class="cta__sun" aria-hidden="true" data-sunrise></div>
@@ -641,7 +659,7 @@
         <svg viewBox="0 0 1000 205" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="fw" x1="0" x2="1" y1="0" y2="0">
-              <stop offset="0" stop-color="#19b6ae"/><stop offset=".52" stop-color="#6bd47d"/><stop offset="1" stop-color="#f7c948"/>
+              <stop offset="0" stop-color="#1ecbb5"/><stop offset="1" stop-color="#1ecbb5"/>
             </linearGradient>
           </defs>
           <text x="500" y="190" text-anchor="middle" font-size="248" fill="url(#fw)" textLength="996" lengthAdjust="spacing">SunFlow</text>

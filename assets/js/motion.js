@@ -90,6 +90,19 @@
         .fromTo(words, { yPercent: 115 }, { yPercent: 0, duration: 1.3, stagger: 0.05 }, 0.05)
         .fromTo($$("[data-hero-fade]", ph), { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 1.1, stagger: 0.08 }, 0.35);
     }
+    var phImg = $(".page-hero .hero-media img");
+    if (phImg) {
+      gsap.fromTo(phImg, { scale: 1.18 }, { scale: 1.04, duration: 2.4, ease: EASE });
+      gsap.to(phImg, { yPercent: 10, ease: "none", scrollTrigger: { trigger: ".page-hero", start: "top top", end: "bottom top", scrub: true } });
+    }
+
+    /* ---------- Mega words slide with scroll ---------- */
+    $$("[data-mega]").forEach(function (row) {
+      var dir = +row.getAttribute("data-mega");
+      gsap.fromTo(row, { xPercent: dir > 0 ? -28 : 0 }, { xPercent: dir > 0 ? 0 : -28, ease: "none",
+        scrollTrigger: { trigger: row.closest(".mega"), start: "top bottom", end: "bottom top", scrub: 0.4 } });
+    });
+
     $$("[data-clip]").forEach(function (el) {
       gsap.fromTo(el, { clipPath: "inset(12% 6% 12% 6% round 28px)" }, {
         clipPath: "inset(0% 0% 0% 0% round 28px)", ease: "none",
