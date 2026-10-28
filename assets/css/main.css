@@ -1956,3 +1956,15 @@ div.work__card .work__facts li { padding: 7px 13px; }
   background-position: calc(-1 * var(--x, 0px) - var(--W, 0px) * .6 * var(--sh)) 0;
   -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
 }
+
+/* Wordmark glow: a blurred gold copy of each letter behind it, brightest near the cursor */
+@property --g { syntax: "<number>"; inherits: true; initial-value: 0; }
+.fw__l { position: relative; isolation: isolate; --g: 0; }
+.fw__l::before {
+  content: attr(data-ch); position: absolute; left: .015em; top: 0; z-index: -1; pointer-events: none;
+  color: transparent; text-shadow: 0 0 .22em rgba(240, 206, 138, .55), 0 0 .5em rgba(217, 166, 78, .35);
+  opacity: 0; transition: opacity .4s;
+}
+.footer__word.is-in .fw__l { overflow: visible; }
+.footer__word.is-in .fw__l::before { opacity: calc(var(--g) * .9); transition: none; }
+.footer__word { overflow: visible; }

@@ -217,20 +217,23 @@
       window.addEventListener("resize", fit);
       gsap.set(letters, { yPercent: 105, rotate: 6 });
       gsap.to(letters, { yPercent: 0, rotate: 0, ease: "expo.out", duration: 1.4, stagger: 0.07,
-        scrollTrigger: { trigger: wm, start: "top 92%" } });
+        scrollTrigger: { trigger: wm, start: "top 92%" },
+        onComplete: function () { wm.classList.add("is-in"); } });
       var shine = { p: 0 };
       gsap.to(shine, { p: 1, duration: 6, ease: "sine.inOut", repeat: -1, yoyo: true,
         onUpdate: function () { wm.style.setProperty("--sh", shine.p); } });
       if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
         var lift = letters.map(function (l) { return gsap.quickTo(l.parentNode, "y", { duration: 0.6, ease: "power3.out" }); });
+        var glow = letters.map(function (l) { return gsap.quickTo(l.parentNode, "--g", { duration: 0.6, ease: "power3.out" }); });
         wm.addEventListener("pointermove", function (e) {
           letters.forEach(function (l, k) {
             var r = l.getBoundingClientRect(), cx = r.left + r.width / 2;
-            var d = Math.abs(e.clientX - cx) / r.width;
-            lift[k](-Math.max(0, 1 - d / 1.6) * r.height * 0.14);
+            var near = Math.max(0, 1 - (Math.abs(e.clientX - cx) / r.width) / 1.6);
+            lift[k](-near * r.height * 0.14);
+            glow[k](near);
           });
         });
-        wm.addEventListener("pointerleave", function () { lift.forEach(function (f) { f(0); }); });
+        wm.addEventListener("pointerleave", function () { lift.forEach(function (f) { f(0); }); glow.forEach(function (f) { f(0); }); });
       }
     }
 
