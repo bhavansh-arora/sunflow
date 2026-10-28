@@ -27,6 +27,7 @@
       try { seen = sessionStorage.getItem("sf-loaded"); } catch (e) {}
       if (rm) h.classList.add("motion-off");
       else if (!seen) h.classList.add("is-preloading");
+      try { if (!rm && sessionStorage.getItem("sf-ptx")) { h.classList.add("ptx-start"); sessionStorage.removeItem("sf-ptx"); } } catch (e) {}
       setTimeout(function () { if (!h.classList.contains("has-gsap")) { h.classList.add("motion-off"); h.classList.remove("is-preloading"); } }, 4000);
     })(document.documentElement);
   </script>
@@ -81,6 +82,10 @@
   </a>
 
   <div class="cursor" aria-hidden="true"><span>View</span></div>
+  <div class="ptx" aria-hidden="true">
+    <div class="ptx__panel"></div>
+    <div class="ptx__mark"><span class="ptx__logo"></span><span class="ptx__tag">Think global · Act local</span></div>
+  </div>
   <div class="tip" role="status" aria-live="polite"></div>
   <div class="service-preview" aria-hidden="true"></div>
 

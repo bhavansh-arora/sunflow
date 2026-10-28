@@ -20,12 +20,35 @@
   };
   function ready() { if (isReady) return; isReady = true; readyFns.forEach(function (f) { f(); }); }
 
+  /* ---------- Page curtain: lifts on arrival, drops before leaving ---------- */
+  var ptx = $(".ptx");
+  if (html.classList.contains("ptx-start")) {
+    requestAnimationFrame(function () { requestAnimationFrame(function () { html.classList.remove("ptx-start"); }); });
+  }
+  window.addEventListener("pageshow", function (e) { if (e.persisted && ptx) ptx.classList.remove("is-in"); });
+  doc.addEventListener("click", function (e) {
+    if (reduce || !ptx || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest("a[href]");
+    if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+    var href = a.getAttribute("href");
+    if (!href || href.charAt(0) === "#" || /^(tel|mailto):/i.test(href)) return;
+    var url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || (url.pathname === location.pathname && url.hash)) return;
+    e.preventDefault();
+    try { window.sessionStorage.setItem("sf-ptx", "1"); } catch (err) {}
+    ptx.classList.add("is-in");
+    setTimeout(function () { location.href = url.href; }, 560);
+  });
+
   /* ---------- Preloader: first visit per session only ---------- */
   (function preloader() {
     var el = $("#preloader");
-    if (!el || !html.classList.contains("is-preloading")) { ready(); return; }
+    if (!el || !html.classList.contains("is-preloading")) {
+      if (html.classList.contains("ptx-start")) setTimeout(ready, 380); else ready();
+      return;
+    }
     store.set("sf-loaded", "1");
-    var count = $(".preloader__count", el), start = performance.now(), dur = 1300;
+    var count = $(".preloader__count", el), start = performance.now(), dur = 1700;
     function tick(now) {
       var t = Math.min(1, (now - start) / dur);
       var e = 1 - Math.pow(1 - t, 3);

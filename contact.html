@@ -27,6 +27,7 @@
       try { seen = sessionStorage.getItem("sf-loaded"); } catch (e) {}
       if (rm) h.classList.add("motion-off");
       else if (!seen) h.classList.add("is-preloading");
+      try { if (!rm && sessionStorage.getItem("sf-ptx")) { h.classList.add("ptx-start"); sessionStorage.removeItem("sf-ptx"); } } catch (e) {}
       setTimeout(function () { if (!h.classList.contains("has-gsap")) { h.classList.add("motion-off"); h.classList.remove("is-preloading"); } }, 4000);
     })(document.documentElement);
   </script>
@@ -95,14 +96,17 @@
 </svg>
 
   <div class="preloader" id="preloader" aria-hidden="true">
-    <div class="preloader__inner">
-      <div class="preloader__sun"></div>
-      <div class="preloader__line"><span></span></div>
-      <div class="preloader__meta">
-        <span class="label">Think global. Act local.</span>
-        <span class="preloader__count">000</span>
-      </div>
+    <div class="preloader__glow"></div>
+    <div class="preloader__brand">
+      <span class="preloader__mark"></span>
+      <span class="preloader__word"></span>
+      <span class="preloader__tag">Solar · Roofing · Exteriors</span>
     </div>
+    <div class="preloader__foot">
+      <span class="preloader__meta">Barrie, Ontario — Think global, act local</span>
+      <span class="preloader__count">000</span>
+    </div>
+    <div class="preloader__line"><span></span></div>
   </div>
 
   <div class="ticker" role="region" aria-label="Announcement">
@@ -498,7 +502,16 @@
           <span class="eyebrow">Think global. <b>Act local.</b></span>
           <h2 class="h3 mt-6">Ready when the sun is.</h2>
           <a class="btn btn--grad" href="contact.html" data-quote-link>Book a free consultation <span class="btn__icon" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
-          <span class="bbb"><img src="assets/img/bbb.webp" alt="BBB Accredited Business, A+ rating" width="293" height="61" loading="lazy"></span>
+          <div class="trust">
+            <div class="trust__seal" aria-hidden="true">
+              <svg viewBox="0 0 100 100"><defs><path id="seal-path" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs><text><textPath href="#seal-path" textLength="236">Accredited business ✦ BBB ✦ </textPath></text></svg>
+              <b>A+</b>
+            </div>
+            <div class="trust__text">
+              <strong>BBB Accredited Business</strong>
+              <span>A+ rating · 100% Canadian · 10+ years installing solar</span>
+            </div>
+          </div>
         </div>
         <div class="footer__cols">
           <div class="footer__col">
@@ -578,6 +591,10 @@
   </a>
 
   <div class="cursor" aria-hidden="true"><span>View</span></div>
+  <div class="ptx" aria-hidden="true">
+    <div class="ptx__panel"></div>
+    <div class="ptx__mark"><span class="ptx__logo"></span><span class="ptx__tag">Think global · Act local</span></div>
+  </div>
   <div class="tip" role="status" aria-live="polite"></div>
   <div class="service-preview" aria-hidden="true"></div>
 
